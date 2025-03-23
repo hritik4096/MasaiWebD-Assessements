@@ -1,0 +1,42 @@
+/* Reset styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Flex container - Row layout */
+.row-layout {
+    display: flex; /* Enables Flexbox */
+    flex-direction: row; /* Default: Items arranged in a row */
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+/* Flex container - Column layout */
+.column-layout {
+    display: flex; /* Enables Flexbox */
+    flex-direction: column; /* Items arranged in a vertical column */
+    align-items: center;
+    gap: 10px;
+}
+
+/* Flex items */
+.item {
+    width: 100px;
+    height: 100px;
+    background-color: lightcoral;
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}

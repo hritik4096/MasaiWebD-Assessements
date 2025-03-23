@@ -1,0 +1,28 @@
+/* Reset default margins and paddings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Flex container */
+.container {
+    display: flex; /* Enables Flexbox */
+    justify-content: center; /* Centers items horizontally */
+    align-items: center; /* Centers items vertically */
+    height: 100vh; /* Full viewport height */
+    background-color: #f4f4f4;
+}
+
+/* Flex items */
+.item {
+    width: 100px;
+    height: 100px;
+    background-color: lightblue;
+    border: 2px solid #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    margin: 10px;
+}
