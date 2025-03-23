@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mastering CSS Display Properties</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>CSS Display Properties Demonstration</h1>
+
+    <div class="block-element">Block Element</div>
+    <span class="inline-element">Inline Element</span>
+    <div class="inline-block-element">Inline-Block Element</div>
+    <div class="hidden-element" id="hiddenBox">Hidden Element (Toggled)</div>
+
+    <button onclick="toggleVisibility()">Toggle Hidden Element</button>
+
+    <script>
+        function toggleVisibility() {
+            let hiddenBox = document.getElementById("hiddenBox");
+            if (hiddenBox.style.display === "none") {
+                hiddenBox.style.display = "block";
+            } else {
+                hiddenBox.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>

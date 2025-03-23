@@ -1,0 +1,39 @@
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Container */
+.container {
+    display: flex; /* Flexbox for proper alignment */
+    justify-content: center;
+    gap: 15px; /* Space between boxes */
+    padding: 20px;
+    margin-top: 20px;
+}
+
+/* Boxes */
+.box {
+    width: 100px;
+    height: 100px;
+    background: lightblue;
+    border: 1px solid black;
+    text-align: center;
+    line-height: 100px; /* Center text */
+    font-weight: bold;
+}
+
+/* Text (Fixed Position Issue Fixed) */
+.text {
+    position: fixed;
+    left: 50%;
+    top: 10px; /* Added space from top */
+    transform: translateX(-50%); /* Center horizontally */
+    background: rgba(255, 255, 255, 0.8);
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
