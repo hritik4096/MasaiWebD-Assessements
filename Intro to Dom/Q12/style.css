@@ -1,0 +1,14 @@
+.container {
+    padding: 20px;
+    border: 1px solid black;
+}
+
+.bold-blue {
+    font-weight: bold;
+    color: blue;
+}
+
+.italic-red {
+    font-style: italic;
+    color: red;
+}

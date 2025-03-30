@@ -1,0 +1,30 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 20px;
+}
+
+.box {
+    padding: 20px;
+    margin: 10px;
+    border: 2px solid black;
+}
+
+#outer {
+    background-color: lightcoral;
+}
+
+#middle {
+    background-color: lightblue;
+}
+
+#inner {
+    background-color: lightgreen;
+}
+
+button {
+    display: block;
+    margin: 10px auto;
+    padding: 5px 10px;
+    font-size: 16px;
+}
