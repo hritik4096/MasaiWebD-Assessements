@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+    <style>
+       
+        body { font-family: sans-serif; }
+        .container { display: flex; }
+        .books, .members { width: 50%; padding: 20px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        form { display: flex; flex-direction: column; width: 300px; }
+        form label { margin-top: 10px; }
+        form input, form select { padding: 8px; margin-bottom: 10px; }
+        button { padding: 10px; background-color: #4CAF50; color: white; border: none; cursor: pointer; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="books">
+            <h2>Books</h2>
+            <form id="bookForm">
+                <label for="bookTitle">Title:</label>
+                <input type="text" id="bookTitle" required>
+                <label for="bookAuthor">Author:</label>
+                <input type="text" id="bookAuthor" required>
+                <label for="bookGenre">Genre:</label>
+                <select id="bookGenre">
+                    <option value="Science Fiction">Science Fiction</option>
+                    <option value="Dystopian">Dystopian</option>
+                    <option value="Fantasy">Fantasy</option>
+                </select>
+                <label for="bookYear">Published Year:</label>
+                <input type="number" id="bookYear" required>
+                <label for="bookAvailable">Available:</label>
+                <select id="bookAvailable">
+                    <option value="true">True</option>
+                    <option value="false">False</option>
+                </select>
+                <button type="submit">Add/Update Book</button>
+                <input type="hidden" id="bookId">
+            </form>
+            <div id="bookFilters">
+                <label for="filterGenre">Filter Genre:</label>
+                <select id="filterGenre"><option value="">All</option><option value="Science Fiction">Science Fiction</option><option value="Dystopian">Dystopian</option><option value="Fantasy">Fantasy</option></select>
+                <label for="filterAuthor">Filter Author:</label>
+                <input type="text" id="filterAuthor">
+                <label for="filterAvailable">Filter Available:</label>
+                <select id="filterAvailable"><option value="">All</option><option value="true">True</option><option value="false">False</option></select>
+                <label for="sortBooks">Sort By:</label>
+                <select id="sortBooks"><option value="title">Title</option><option value="author">Author</option><option value="publishedYear">Year</option></select>
+                <label for="booksPerPage">Items Per Page:</label>
+                <input type="number" id="booksPerPage" value="5">
+                <button id="applyBookFilters">Apply Filters</button>
+            </div>
+            <table id="bookTable">
+                <thead><tr><th>Title</th><th>Author</th><th>Genre</th><th>Year</th><th>Available</th><th>Actions</th></tr></thead>
+                <tbody></tbody>
+            </table>
+            <div id="bookPagination">
+                <button id="prevBookPage">Previous</button><span id="bookPageNumber">1</span><button id="nextBookPage">Next</button>
+            </div>
+            <div id="bookError" class="error"></div>
+        </div>
+        <div class="members">
+            <h2>Members</h2>
+            <form id="memberForm">
+                <label for="memberName">Name:</label>
+                <input type="text" id="memberName" required>
+                <label for="memberDate">Membership Date:</label>
+                <input type="date" id="memberDate" required>
+                <label for="memberActive">Active:</label>
+                <select id="memberActive">
+                    <option value="true">True</option>
+                    <option value="false">False</option>
+                </select>
+                <button type="submit">Add/Update Member</button>
+                <input type="hidden" id="memberId">
+            </form>
+            <div id="memberFilters">
+                <label for="filterActive">Filter Active:</label>
+                <select id="filterActive"><option value="">All</option><option value="true">True</option><option value="false">False</option></select>
+                <label for="filterMembershipDate">Filter Membership Date (YYYY-MM):</label>
+                <input type="month" id="filterMembershipDate">
+                <label for="sortMembers">Sort By:</label>
+                <select id="sortMembers"><option value="name">Name</option><option value="membershipDate">Membership Date</option></select>
+                <label for="membersPerPage">Items Per Page:</label>
+                <input type="number" id="membersPerPage" value="5">
+                <button id="applyMemberFilters">Apply Filters</button>
+            </div>
+            <table id="memberTable">
+                <thead><tr><th>Name</th><th>Membership Date</th><th>Active</th><th>Actions</th></tr></thead>
+                <tbody></tbody>
+            </table>
+            <div id="memberPagination">
+                <button id="prevMemberPage">Previous</button><span id="memberPageNumber">1</span><button id="nextMemberPage">Next</button>
+            </div>
+            <div id="memberError" class="error"></div>
+        </div>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase Users</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>User List</h1>
+    <table id="userTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <div id="errorMessage" class="error"></div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+
+    <script>
+        // Replace with your Firebase configuration
+        const firebaseConfig = {
+            databaseURL: "YOUR_FIREBASE_DATABASE_URL"
+        };
+
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const database = app.database();
+
+        const userTableBody = document.querySelector("#userTable tbody");
+        const errorMessageDiv = document.querySelector("#errorMessage");
+
+        // Fetch users from Firebase Realtime Database
+        database.ref("users").once("value")
+            .then((snapshot) => {
+                const users = snapshot.val();
+                if (users) {
+                    displayUsers(users);
+                } else {
+                    errorMessageDiv.textContent = "No users found.";
+                }
+            })
+            .catch((error) => {
+                errorMessageDiv.textContent = `Error fetching users: ${error.message}`;
+            });
+
+        // Display users in a table
+        function displayUsers(users) {
+            userTableBody.innerHTML = ""; // Clear existing table data
+
+            for (const userId in users) {
+                if (users.hasOwnProperty(userId)) {
+                    const user = users[userId];
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${user.name}</td>
+                        <td>${user.email}</td>
+                    `;
+                    userTableBody.appendChild(row);
+                }
+            }
+        }
+    </script>
+</body>
+</html>

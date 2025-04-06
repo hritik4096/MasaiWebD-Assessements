@@ -1,0 +1,46 @@
+const snapshot = await query.get();
+novels = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+displayNovels(novels);
+}
+
+function displayNovels(novelList) {
+novelTableBody.innerHTML = "";
+novelList.forEach(novel => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+        <td>${novel.title}</td>
+        <td>${novel.author}</td>
+        <td>${novel.price}</td>
+        <td>${novel.release_year}</td>
+        <td>${novel.genre}</td>
+    `;
+    novelTableBody.appendChild(row);
+});
+}
+
+function handleFiltersAndSearch() {
+const year = yearFilterInput.value.trim();
+const yearRange = yearRangeFilterInput.value.trim();
+const sort = sortPriceSelect.value;
+const search = searchInput.value.trim();
+
+const filters = {};
+if (year) filters.year = year;
+if (yearRange) filters.yearRange = yearRange;
+
+const sortObj = {};
+if (sort) sortObj.price = sort;
+
+fetchNovels(filters, sortObj, search);
+}
+
+yearFilterInput.addEventListener("input", handleFiltersAndSearch);
+yearRangeFilterInput.addEventListener("input", handleFiltersAndSearch);
+sortPriceSelect.addEventListener("change", handleFiltersAndSearch);
+searchInput.addEventListener("input", handleFiltersAndSearch);
+
+// Initial fetch
+fetchNovels();
+</script>
+</body>
+</html>
