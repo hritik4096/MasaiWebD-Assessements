@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Debounced Movie Search</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+    }
+    input {
+      width: 300px;
+      padding: 10px;
+      font-size: 16px;
+    }
+    #results {
+      margin-top: 20px;
+    }
+    .movie {
+      padding: 5px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Search Movies</h2>
+  <input type="text" id="searchInput" placeholder="Type a movie name..." />
+  <div id="results"></div>
+
+  <script>
+    const input = document.getElementById('searchInput');
+    const resultsDiv = document.getElementById('results');
+    let debounceTimeout;
+
+    input.addEventListener('input', () => {
+      clearTimeout(debounceTimeout);
+
+      debounceTimeout = setTimeout(() => {
+        const query = input.value.trim();
+        if (query !== "") {
+          searchMovies(query);
+        } else {
+          resultsDiv.innerHTML = "";
+        }
+      }, 500);
+    });
+
+    async function searchMovies(query) {
+      const API_KEY = "YOUR_API_KEY"; // Replace with your OMDB API key
+      const url = `https://www.omdbapi.com/?apikey=${API_KEY}&s=${encodeURIComponent(query)}`;
+
+      try {
+        const res = await fetch(url);
+        const data = await res.json();
+
+        if (data.Response === "True") {
+          displayResults(data.Search);
+        } else {
+          resultsDiv.innerHTML = `<p>No results found.</p>`;
+        }
+      } catch (error) {
+        resultsDiv.innerHTML = `<p>Error fetching data.</p>`;
+        console.error(error);
+      }
+    }
+
+    function displayResults(movies) {
+      resultsDiv.innerHTML = movies.map(movie => `<div class="movie">${movie.Title}</div>`).join('');
+    }
+  </script>
+
+</body>
+</html>

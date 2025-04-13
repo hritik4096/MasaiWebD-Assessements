@@ -1,0 +1,31 @@
+<h2>Register</h2>
+<input id="email" placeholder="Email" /><br/>
+<input id="password" type="password" placeholder="Password" /><br/>
+<select id="role">
+  <option value="user">User</option>
+  <option value="admin">Admin</option>
+</select><br/>
+<button onclick="register()">Register</button>
+
+<script>
+  function register() {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const role = document.getElementById("role").value;
+
+    auth.createUserWithEmailAndPassword(email, password)
+      .then(cred => {
+        return db.ref("users/" + cred.user.uid).set({ email, role });
+      })
+      .then(() => {
+        alert("Registration successful! Please log in.");
+        window.location.href = "login.html";
+      })
+      .catch(err => alert(err.message));
+  }
+</script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+<script src="firebase-config.js"></script>
+

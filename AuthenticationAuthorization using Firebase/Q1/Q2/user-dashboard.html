@@ -1,0 +1,24 @@
+<h2>User Dashboard</h2>
+<div id="products"></div>
+
+<script>
+  const role = localStorage.getItem("role");
+  if (role !== "user") window.location.href = "admin-dashboard.html";
+
+  db.ref("products").on("value", snap => {
+    const data = snap.val();
+    const container = document.getElementById("products");
+    container.innerHTML = "";
+
+    for (let id in data) {
+      const p = data[id];
+      container.innerHTML += `
+        <div>
+          <h3>${p.title}</h3>
+          <img src="${p.image}" width="100"/>
+          <p>$${p.price}</p>
+        </div>
+      `;
+    }
+  });
+</script>

@@ -1,0 +1,58 @@
+<h2>Admin Dashboard</h2>
+<input id="title" placeholder="Product Title" />
+<input id="price" placeholder="Price" type="number" />
+<input id="image" placeholder="Image URL" />
+<button onclick="addProduct()">Add Product</button>
+
+<div id="products"></div>
+
+<script>
+  const role = localStorage.getItem("role");
+  if (role !== "admin") window.location.href = "user-dashboard.html";
+
+  function addProduct() {
+    const title = document.getElementById("title").value;
+    const price = document.getElementById("price").value;
+    const image = document.getElementById("image").value;
+
+    const productId = Date.now();
+    db.ref("products/" + productId).set({ title, price, image });
+  }
+
+  function loadProducts() {
+    db.ref("products").on("value", snap => {
+      const data = snap.val();
+      const container = document.getElementById("products");
+      container.innerHTML = "";
+
+      for (let id in data) {
+        const p = data[id];
+        container.innerHTML += `
+          <div>
+            <h3>${p.title}</h3>
+            <img src="${p.image}" width="100"/>
+            <p>$${p.price}</p>
+            <button onclick="editProduct('${id}')">Edit</button>
+            <button onclick="deleteProduct('${id}')">Delete</button>
+          </div>
+        `;
+      }
+    });
+  }
+
+  function editProduct(id) {
+    const title = prompt("New Title:");
+    const price = prompt("New Price:");
+    const image = prompt("New Image URL:");
+
+    if (title && price && image) {
+      db.ref("products/" + id).update({ title, price, image });
+    }
+  }
+
+  function deleteProduct(id) {
+    db.ref("products/" + id).remove();
+  }
+
+  loadProducts();
+</script>
